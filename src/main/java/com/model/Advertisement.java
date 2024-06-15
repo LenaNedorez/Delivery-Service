@@ -19,7 +19,7 @@ public class Advertisement extends BaseEntity {
 
     private String title;
 
-    @OneToMany
+    @ManyToMany
     private Set<Type> types = new HashSet<>();
 
     private String deliverFrom;
