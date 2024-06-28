@@ -1,7 +1,7 @@
 package com.uniloftsky.springframework.spring5freelancedeliveryservice.api.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.uniloftsky.springframework.spring5freelancedeliveryservice.model.Details;
-import com.uniloftsky.springframework.spring5freelancedeliveryservice.model.Driver;
 import com.uniloftsky.springframework.spring5freelancedeliveryservice.model.Status;
 import com.uniloftsky.springframework.spring5freelancedeliveryservice.model.Type;
 import lombok.AllArgsConstructor;
@@ -21,10 +21,16 @@ public class AdvertisementDTO {
     private Long id;
     private String title;
     private Set<Type> types;
+
+    @JsonProperty("deliver_from")
     private String deliverFrom;
+
+    @JsonProperty("deliver_to")
     private String deliverTo;
     private Details details;
-    private Driver executor;
+
+    @JsonProperty("driver_id")
+    private Long driverId;
     private Integer price;
     private LocalDate date;
     private Integer period;
