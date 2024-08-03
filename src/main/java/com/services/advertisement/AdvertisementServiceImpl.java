@@ -1,10 +1,8 @@
 package com.uniloftsky.springframework.spring5freelancedeliveryservice.services.advertisement;
 
 import com.uniloftsky.springframework.spring5freelancedeliveryservice.api.v1.mappers.AdvertisementMapper;
-import com.uniloftsky.springframework.spring5freelancedeliveryservice.api.v1.mappers.DetailsMapper;
 import com.uniloftsky.springframework.spring5freelancedeliveryservice.api.v1.mappers.DriverMapper;
 import com.uniloftsky.springframework.spring5freelancedeliveryservice.api.v1.model.AdvertisementDTO;
-import com.uniloftsky.springframework.spring5freelancedeliveryservice.api.v1.model.DetailsDTO;
 import com.uniloftsky.springframework.spring5freelancedeliveryservice.api.v1.model.DriverDTO;
 import com.uniloftsky.springframework.spring5freelancedeliveryservice.api.v1.model.UserDTO;
 import com.uniloftsky.springframework.spring5freelancedeliveryservice.exceptions.BadRequestException;
@@ -42,9 +40,8 @@ public class AdvertisementServiceImpl implements AdvertisementService {
 
     private final AdvertisementMapper advertisementMapper;
     private final DriverMapper driverMapper;
-    private final DetailsMapper detailsMapper;
 
-    public AdvertisementServiceImpl(AdvertisementRepository advertisementRepository, AdvertisementCriteriaRepository advertisementCriteriaRepository, TypeService typeService, UserService userService, @Lazy DriverService driverService, NotificationService notificationService, AdvertisementMapper advertisementMapper, DriverMapper driverMapper, @Lazy DetailsMapper detailsMapper) {
+    public AdvertisementServiceImpl(AdvertisementRepository advertisementRepository, AdvertisementCriteriaRepository advertisementCriteriaRepository, TypeService typeService, UserService userService, @Lazy DriverService driverService, NotificationService notificationService, AdvertisementMapper advertisementMapper, DriverMapper driverMapper) {
         this.advertisementRepository = advertisementRepository;
         this.advertisementCriteriaRepository = advertisementCriteriaRepository;
         this.typeService = typeService;
@@ -53,7 +50,6 @@ public class AdvertisementServiceImpl implements AdvertisementService {
         this.notificationService = notificationService;
         this.advertisementMapper = advertisementMapper;
         this.driverMapper = driverMapper;
-        this.detailsMapper = detailsMapper;
     }
 
     @Override
@@ -124,9 +120,6 @@ public class AdvertisementServiceImpl implements AdvertisementService {
         Advertisement patchedAdvertisement = findById(id);
         AdvertisementDTO patchedAdvertisementDTO = advertisementMapper.advertisementToAdvertisementDTO(patchedAdvertisement);
         DTOHandler.handleFields(advertisementDTO, patchedAdvertisementDTO);
-        if (advertisementDTO.getDetails() != null) {
-            handleAdvertisementDetails(advertisementDTO.getDetails(), patchedAdvertisement, patchedAdvertisementDTO);
-        }
         patchedAdvertisement = advertisementMapper.advertisementDTOToAdvertisement(patchedAdvertisementDTO);
         save(patchedAdvertisement, user);
         return advertisementMapper.advertisementToAdvertisementDTO(patchedAdvertisement);
@@ -189,12 +182,6 @@ public class AdvertisementServiceImpl implements AdvertisementService {
         driverService.save(driver, userService.findById(driver.getUserId()));
         User client = userService.findById(driver.getUserId());
         DTOHandler.createNotificationOnEvent(client, Notification.builder().message("Вам назначено замовлення '" + advertisement.getTitle() + "'.").title("Вас назначили на нове замовлення!").build(), notificationService);
-    }
-
-    private void handleAdvertisementDetails(DetailsDTO detailsDTO, Advertisement patchedAdvertisement, AdvertisementDTO patchedAdvertisementDTO) {
-        DetailsDTO patchedDetailsDTO = detailsMapper.detailsToDetailsDTO(patchedAdvertisement.getDetails());
-        DTOHandler.handleFields(detailsDTO, patchedDetailsDTO);
-        patchedAdvertisementDTO.setDetails(patchedDetailsDTO);
     }
 
 }

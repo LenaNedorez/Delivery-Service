@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
 
-@Tag(name = "user's advertisements", description = "Controller what provides end-points to work with user's advertisements. Authentication is required.")
+@Tag(name = "User's advertisements", description = "Controller what provides end-points to work with user's advertisements. Authentication is required.")
 @RestController
 @RequestMapping("/api/v1/user/advertisements")
 public class AdvertisementsController extends AbstractController {
@@ -32,7 +32,6 @@ public class AdvertisementsController extends AbstractController {
         this.advertisementService = advertisementService;
         this.advertisementMapper = advertisementMapper;
     }
-
 
     @Operation(summary = "Get all advertisements what belongs to a user.")
     @ApiResponses(value = {
