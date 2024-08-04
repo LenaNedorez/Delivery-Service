@@ -1,11 +1,8 @@
 package com.uniloftsky.springframework.spring5freelancedeliveryservice.bootstrap;
 
-import com.uniloftsky.springframework.spring5freelancedeliveryservice.api.v1.mappers.NotificationMapper;
-import com.uniloftsky.springframework.spring5freelancedeliveryservice.api.v1.mappers.UserMapper;
 import com.uniloftsky.springframework.spring5freelancedeliveryservice.api.v1.model.UserDTO;
 import com.uniloftsky.springframework.spring5freelancedeliveryservice.model.*;
 import com.uniloftsky.springframework.spring5freelancedeliveryservice.model.auth0.UserMetadata;
-import com.uniloftsky.springframework.spring5freelancedeliveryservice.repositories.NotificationRepository;
 import com.uniloftsky.springframework.spring5freelancedeliveryservice.repositories.TypeRepository;
 import com.uniloftsky.springframework.spring5freelancedeliveryservice.repositories.UserRepository;
 import com.uniloftsky.springframework.spring5freelancedeliveryservice.services.advertisement.AdvertisementService;
@@ -13,6 +10,7 @@ import com.uniloftsky.springframework.spring5freelancedeliveryservice.services.d
 import com.uniloftsky.springframework.spring5freelancedeliveryservice.services.notification.NotificationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -20,28 +18,23 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Profile("default")
 @Slf4j
 @Component
 public class DataLoader implements CommandLineRunner {
 
     private final TypeRepository typeRepository;
     private final UserRepository userRepository;
-    private final NotificationMapper notificationMapper;
-    private final NotificationRepository notificationRepository;
     private final NotificationService notificationService;
     private final AdvertisementService advertisementService;
     private final DriverService driverService;
-    private final UserMapper userMapper;
 
-    public DataLoader(TypeRepository typeRepository, UserRepository userRepository, NotificationMapper notificationMapper, NotificationRepository notificationRepository, NotificationService notificationService, AdvertisementService advertisementService, DriverService driverService, UserMapper userMapper) {
+    public DataLoader(TypeRepository typeRepository, UserRepository userRepository, NotificationService notificationService, AdvertisementService advertisementService, DriverService driverService) {
         this.typeRepository = typeRepository;
         this.userRepository = userRepository;
-        this.notificationMapper = notificationMapper;
-        this.notificationRepository = notificationRepository;
         this.notificationService = notificationService;
         this.advertisementService = advertisementService;
         this.driverService = driverService;
-        this.userMapper = userMapper;
     }
 
     @Override
@@ -74,6 +67,7 @@ public class DataLoader implements CommandLineRunner {
 
         Advertisement advertisement = Advertisement.builder().title("Deliver").date(LocalDate.now()).deliverFrom("Бердичів").deliverTo("Житомир").description("Desc")
                 .types(types).price(100).status(Status.ACTIVE).build();
+        advertisement.setDetails(Details.builder().peopleCount(10).build());
         advertisementService.save(advertisement, userRepository.findById("auth0|607d94db1c9629006daa7adf"));
 
         log.info("Saved advertisement1");
@@ -81,6 +75,7 @@ public class DataLoader implements CommandLineRunner {
 
         Advertisement advertisement1 = Advertisement.builder().date(LocalDate.now()).deliverFrom("Київ").deliverTo("Львів").description("Desc").title("Доставка")
                 .types(types.stream().limit(2).collect(Collectors.toSet())).price(200).status(Status.ACTIVE).build();
+        advertisement1.setDetails(Details.builder().height(10).weight(20).build());
         advertisementService.save(advertisement1, userRepository.findById("auth0|607d94db1c9629006daa7adf"));
 
         log.info("Saved advertisement2");
