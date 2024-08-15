@@ -1,0 +1,23 @@
+# spring5-freelance-delivery-service
+REST API project - freelance delivery service.
+
+Used stack:
+- [Spring Framework](https://spring.io/) 
+- [OpenAPI](https://swagger.io/)
+- [MapStruct](https://mapstruct.org/)
+- [Auth0](https://auth0.com/)
+- [PostgreSQL](https://www.postgresql.org/)
+
+
+## Getting Started
+
+Freelance delivery API is a Spring Boot application built using Maven. You can build a jar file and run it from the command line (JDK 11 is required):
+
+```bash
+git clone https://github.com/uniloftsky/spring5-freelance-delivery-service
+cd spring5-freelance-delivery-service
+./mvnw package
+java -jar target/*.jar
+```
+
+You can then access api documentation here: [http://localhost:8080/api](http://localhost:8080/api)
