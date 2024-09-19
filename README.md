@@ -29,9 +29,13 @@ This project is a REST API service for managing orders for the delivery of goods
 
 ## Installation
 1. Clone the repository:
+```bash
 git clone <url of repository>
+```
 2. Install dependencies:
+```bash
 mvn clean install
+```
 3. Set up configuration:
 - Copy the application.properties.example file to application.properties.
 - Replace the default values ​​in the application.properties file with your own.
