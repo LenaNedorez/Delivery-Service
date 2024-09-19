@@ -5,15 +5,15 @@ REST API project - freelance delivery service.
 This project is a REST API service for managing orders for the delivery of goods. The service uses a modern technology stack, ensuring reliability, security and scalability. 
 
 ## Functionality
-o Creating and managing orders:  
+### Creating and managing orders:  
 - Adding a new order with the delivery address, goods and contact information
 - Updating the order status (in process, delivered, canceled) 
 - Viewing the order history
-o Delivery management:
+### Delivery management:
 - Assigning a courier to an order 
 - Tracking the courier's location
 - Updating the delivery status
-o Product management:
+### Product management:
 - Adding/removing products from the catalog 
 - Updating product information (name, description, price)
 
