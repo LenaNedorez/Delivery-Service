@@ -1,10 +1,10 @@
 # spring5-freelance-delivery-service
 REST API project - freelance delivery service.
 
-##Description
+## Description
 This project is a REST API service for managing orders for the delivery of goods. The service uses a modern technology stack, ensuring reliability, security and scalability. 
 
-##Functionality
+## Functionality
 • Creating and managing orders: 
 o Adding a new order with the delivery address, goods and contact information. 
 o Updating the order status (in process, delivered, canceled). 
@@ -17,7 +17,7 @@ o Updating the delivery status.
 o Adding/removing products from the catalog. 
 o Updating product information (name, description, price).
 
-Used stack:
+## Technologies
 - [Spring Framework](https://spring.io/) 
 - [OpenAPI](https://swagger.io/)
 - [MapStruct](https://mapstruct.org/)
