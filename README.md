@@ -1,4 +1,4 @@
-# spring5-freelance-delivery-service
+# Delivery service
 REST API project - freelance delivery service.
 
 ## Description
