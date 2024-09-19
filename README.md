@@ -18,12 +18,14 @@ This project is a REST API service for managing orders for the delivery of goods
 - Updating product information (name, description, price)
 
 ## Technologies
-- [Spring Framework](https://spring.io/) 
-- [OpenAPI](https://swagger.io/)
-- [MapStruct](https://mapstruct.org/)
-- [Auth0](https://auth0.com/)
-- [PostgreSQL](https://www.postgresql.org/)
-
+- Backend: Java
+- Framework: Spring Framework
+- Build system: Maven
+- API specification: OpenAPI 
+- DTO generation: MapStruct
+- Authentication and authorization: Auth0
+- Database: PostgreSQL
+- API documentation: Swagger
 
 ## Installation
 1. Clone the repository:
